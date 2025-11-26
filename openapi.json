@@ -1,0 +1,2391 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/tutors": {
+      "get": {
+        "operationId": "AppController_ListTutors",
+        "summary": "lists all approved tutors",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserFilterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "page": 1,
+                    "limit": 10,
+                    "totalCount": 1,
+                    "tutors": [
+                      {
+                        "_id": "6902a4b465d7f1438875e05f",
+                        "user": {
+                          "_id": "6902a4b465d7f1438875e05c",
+                          "fullName": "john brow",
+                          "role": "TUTOR"
+                        },
+                        "location": "sabo yaba",
+                        "subjectsOfInterest": [
+                          {
+                            "_id": "6902a460330e427877a06cd4",
+                            "name": "mathematics"
+                          },
+                          {
+                            "_id": "6902a460330e427877a06cd8",
+                            "name": "english"
+                          }
+                        ],
+                        "haveReliableComputer": true,
+                        "isVerified": true,
+                        "teachingStyleAndExperience": "I focus on personalized learning, ensuring students grasp concepts through examples and practice.",
+                        "yearsOfExperience": 3
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/curriculums": {
+      "get": {
+        "operationId": "CurriculumController_findAll",
+        "summary": "lists all curriculum",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "68f78329ffa7a99cd4702c52",
+                      "name": "american",
+                      "description": "a flexible education system from the united states that focuses on continuous assessment, creativity, and extracurricular development, typically following a k–12 structure.",
+                      "createdAt": "2025-10-21T12:57:13.375Z",
+                      "updatedAt": "2025-10-21T12:57:13.375Z",
+                      "id": "68f78329ffa7a99cd4702c52"
+                    },
+                    {
+                      "_id": "68f78329ffa7a99cd4702c48",
+                      "name": "british",
+                      "description": "an education system based on the uk curriculum, emphasizing critical thinking, broad subject exposure, and structured assessment through stages like key stages, gcses, and a-levels.",
+                      "createdAt": "2025-10-21T12:57:13.272Z",
+                      "updatedAt": "2025-10-21T12:57:13.272Z",
+                      "id": "68f78329ffa7a99cd4702c48"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "curriculums"
+        ]
+      }
+    },
+    "/subjects": {
+      "get": {
+        "operationId": "SubjectsController_findAll",
+        "summary": "lists all subjects",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "68f78334d8aeafbec1dd1230",
+                      "name": "english",
+                      "description": "builds communication skills in reading, writing, speaking, and comprehension, while also enhancing grammar and vocabulary.",
+                      "createdAt": "2025-10-21T12:57:24.431Z",
+                      "updatedAt": "2025-10-21T12:57:24.431Z",
+                      "id": "68f78334d8aeafbec1dd1230"
+                    },
+                    {
+                      "_id": "68f78334d8aeafbec1dd1245",
+                      "name": "languages (french)",
+                      "description": "introduces students to basic french communication skills in speaking, reading, and writing, promoting multilingualism and global exposure.",
+                      "createdAt": "2025-10-21T12:57:24.479Z",
+                      "updatedAt": "2025-10-21T12:57:24.479Z",
+                      "id": "68f78334d8aeafbec1dd1245"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "subjects"
+        ]
+      }
+    },
+    "/class-levels": {
+      "get": {
+        "operationId": "ClassLevelController_findAll",
+        "summary": "lists all class-levels",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "68f78334d8aeafbec1dd1263",
+                      "name": "jss 1",
+                      "description": "the first stage of junior secondary education, introducing subjects like basic science, technology, and business studies to broaden understanding.",
+                      "createdAt": "2025-10-21T12:57:24.541Z",
+                      "updatedAt": "2025-10-21T12:57:24.541Z",
+                      "id": "68f78334d8aeafbec1dd1263"
+                    },
+                    {
+                      "_id": "68f78334d8aeafbec1dd1266",
+                      "name": "jss 2",
+                      "description": "builds on jss 1 with more complex concepts in core subjects and early exposure to career-related topics.",
+                      "createdAt": "2025-10-21T12:57:24.547Z",
+                      "updatedAt": "2025-10-21T12:57:24.547Z"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "class-levels"
+        ]
+      }
+    },
+    "/students/sign-up": {
+      "post": {
+        "operationId": "StudentsController_create",
+        "summary": "registers a user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStudentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "success": "OK",
+                    "message": "Student registered successfully",
+                    "next": "verify-email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ]
+      }
+    },
+    "/students/profile": {
+      "get": {
+        "operationId": "StudentsController_getProfile",
+        "summary": "gets a tutorProfile",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "user": {
+                      "fullName": "john brow",
+                      "role": "USER",
+                      "email": "chinedagumarcel@gmail.com",
+                      "isEmailVerified": true,
+                      "status": "ACTIVE",
+                      "deletedAt": null,
+                      "lastActive": null,
+                      "tokenVersion": 3,
+                      "lastLogin": null,
+                      "phone": "09865594765",
+                      "phoneCode": "453",
+                      "createdAt": "2025-10-29T23:28:04.467Z",
+                      "updatedAt": "2025-10-30T08:39:31.071Z",
+                      "__v": 0,
+                      "id": "6902a3043646560042c64872"
+                    },
+                    "curriculum": null,
+                    "location": "sabo yaba",
+                    "classLevel": null,
+                    "subjectsOfInterest": [],
+                    "createdAt": "2025-10-29T23:28:04.557Z",
+                    "updatedAt": "2025-10-29T23:28:04.557Z",
+                    "id": "6902a3043646560042c64875"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/students/review": {
+      "post": {
+        "operationId": "StudentsController_addReview",
+        "summary": "adds a tutor review",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReviewDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Booking created successfully",
+                    "booking": {
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-11-02",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "_id": "69086e8eb531de76f9aa9c2f",
+                      "createdAt": "2025-11-03T08:57:50.836Z",
+                      "updatedAt": "2025-11-03T08:57:50.836Z",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/students/bookings": {
+      "post": {
+        "operationId": "StudentsController_createBooking",
+        "summary": "creates a booking",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Booking created successfully",
+                    "booking": {
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-11-02",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "_id": "69086e8eb531de76f9aa9c2f",
+                      "createdAt": "2025-11-03T08:57:50.836Z",
+                      "updatedAt": "2025-11-03T08:57:50.836Z",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "StudentsController_listBookings",
+        "summary": "list user's bookings",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "69086aeb9465c6f7a86443c3",
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-08-10",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "createdAt": "2025-11-03T08:42:19.135Z",
+                      "updatedAt": "2025-11-03T08:42:19.135Z",
+                      "__v": 0
+                    },
+                    {
+                      "_id": "69086e8eb531de76f9aa9c2f",
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-11-02",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "createdAt": "2025-11-03T08:57:50.836Z",
+                      "updatedAt": "2025-11-03T08:57:50.836Z",
+                      "__v": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/students/bookings/confirm": {
+      "post": {
+        "operationId": "StudentsController_payForBooking",
+        "summary": "confirms a booking",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Booking created successfully",
+                    "booking": {
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-11-02",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "_id": "69086e8eb531de76f9aa9c2f",
+                      "createdAt": "2025-11-03T08:57:50.836Z",
+                      "updatedAt": "2025-11-03T08:57:50.836Z",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/students/bookings/{bookingID}": {
+      "get": {
+        "operationId": "StudentsController_getBooking",
+        "summary": "get user's booking by ID",
+        "parameters": [
+          {
+            "name": "bookingID",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "_id": "69086aeb9465c6f7a86443c3",
+                    "tutor": {
+                      "user": {
+                        "fullName": "esther brow",
+                        "email": "marcelezenagu92@gmail.com",
+                        "id": "6907dad8f6cff34d4fe0baae"
+                      },
+                      "id": "6907dad8f6cff34d4fe0bab1"
+                    },
+                    "student": {
+                      "user": {
+                        "fullName": "user brow",
+                        "email": "marcel.c.ezenagu@gmail.com",
+                        "id": "6907da58f6cff34d4fe0baa6"
+                      },
+                      "id": "6907da58f6cff34d4fe0baa9"
+                    },
+                    "date": "2025-08-10",
+                    "startTime": "13:00",
+                    "endTime": "14:00",
+                    "status": "PENDING",
+                    "createdAt": "2025-11-03T08:42:19.135Z",
+                    "updatedAt": "2025-11-03T08:42:19.135Z",
+                    "__v": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/students/tutors/{tutorID}": {
+      "get": {
+        "operationId": "StudentsController_getTutors",
+        "summary": "gets an approved tutor",
+        "parameters": [
+          {
+            "name": "tutorID",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "exams": [],
+                    "_id": "6903aad6f2f03e2b1200f1bc",
+                    "user": {
+                      "_id": "6903aad6f2f03e2b1200f1b9",
+                      "fullName": "esther brow",
+                      "role": "TUTOR"
+                    },
+                    "location": "sabo yaba",
+                    "subjectsOfInterest": [
+                      {
+                        "_id": "6903a18dd8476bc00df18a59",
+                        "name": "languages (yoruba)"
+                      },
+                      {
+                        "_id": "6903a18dd8476bc00df18a4b",
+                        "name": "english"
+                      }
+                    ],
+                    "curriculum": [
+                      {
+                        "_id": "6903a18dd8476bc00df18a41",
+                        "name": "nigerian"
+                      },
+                      {
+                        "_id": "6903a18dd8476bc00df18a45",
+                        "name": "montessori"
+                      }
+                    ],
+                    "classLevels": [
+                      {
+                        "_id": "6903a18dd8476bc00df18a84",
+                        "name": "jss 2"
+                      },
+                      {
+                        "_id": "6903a18dd8476bc00df18a7e",
+                        "name": "primary 6"
+                      },
+                      {
+                        "_id": "6903a18dd8476bc00df18a7b",
+                        "name": "primary 5"
+                      }
+                    ],
+                    "isVerified": true,
+                    "status": "APPROVED",
+                    "createdAt": "2025-10-30T18:13:42.492Z",
+                    "updatedAt": "2025-10-30T18:37:23.586Z",
+                    "__v": 1,
+                    "teachingStyleAndExperience": "I focus on personalized learning, ensuring students grasp concepts through examples and practice.",
+                    "yearsOfExperience": 3,
+                    "availability": {
+                      "_id": "690760a4654a9af39804d8cc",
+                      "tutorId": "6903aad6f2f03e2b1200f1bc",
+                      "__v": 0,
+                      "blockedDates": [
+                        "2025-11-10",
+                        "2025-12-25",
+                        "2026-01-01"
+                      ],
+                      "createdAt": "2025-11-02T13:46:12.449Z",
+                      "updatedAt": "2025-11-02T13:46:12.449Z",
+                      "weeklyAvailability": [
+                        {
+                          "day": "MONDAY",
+                          "ranges": [
+                            {
+                              "startTime": "09:00",
+                              "endTime": "11:00",
+                              "_id": "690760a49ece78b717d82889"
+                            },
+                            {
+                              "startTime": "13:00",
+                              "endTime": "15:00",
+                              "_id": "690760a49ece78b717d8288a"
+                            }
+                          ],
+                          "_id": "690760a49ece78b717d82888"
+                        },
+                        {
+                          "day": "WEDNESDAY",
+                          "ranges": [
+                            {
+                              "startTime": "10:00",
+                              "endTime": "12:00",
+                              "_id": "690760a49ece78b717d8288c"
+                            },
+                            {
+                              "startTime": "16:00",
+                              "endTime": "18:00",
+                              "_id": "690760a49ece78b717d8288d"
+                            }
+                          ],
+                          "_id": "690760a49ece78b717d8288b"
+                        },
+                        {
+                          "day": "FRIDAY",
+                          "ranges": [
+                            {
+                              "startTime": "09:30",
+                              "endTime": "11:30",
+                              "_id": "690760a49ece78b717d8288f"
+                            }
+                          ],
+                          "_id": "690760a49ece78b717d8288e"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ]
+      }
+    },
+    "/students/tutors": {
+      "get": {
+        "operationId": "StudentsController_ListTutors",
+        "summary": "lists all linked tutors",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserFilterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "tutors": [
+                      {
+                        "_id": "6907dad8f6cff34d4fe0bab1",
+                        "fullName": "esther brow",
+                        "profilePicture": null,
+                        "subjects": []
+                      }
+                    ],
+                    "suggestedTutors": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ]
+      }
+    },
+    "/students/dashboard": {
+      "get": {
+        "operationId": "StudentsController_getDashboard",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "upcomingLessons": [
+                      {
+                        "_id": "69208a5c6403dd0af0fbdf05",
+                        "tutor": {
+                          "_id": "6907dad8f6cff34d4fe0bab1"
+                        },
+                        "dateTime": {
+                          "date": "2025-12-12",
+                          "startTime": "9:30",
+                          "endTime": "11:00"
+                        },
+                        "status": "PENDING"
+                      }
+                    ],
+                    "tutors": [
+                      {
+                        "_id": "6907dad8f6cff34d4fe0bab1"
+                      }
+                    ],
+                    "completedLessons": 4,
+                    "assignmentsPending": "0",
+                    "continuedWatching": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ]
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "operationId": "AuthController_logOut",
+        "summary": "User logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "loggedOut successfully"
+          }
+        },
+        "tags": [
+          "auth"
+        ],
+        "security": [
+          {
+            "": []
+          }
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "summary": "logs in a user using email",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "access_token": "user-access-token",
+                    "user": {
+                      "fullName": "john brow",
+                      "role": "USER",
+                      "email": "marcelagu92@gmail.com",
+                      "isEmailVerified": true,
+                      "status": "active",
+                      "deletedAt": null,
+                      "lastActive": null,
+                      "tokenVersion": 3,
+                      "createdAt": "2025-10-22T03:29:49.592Z",
+                      "updatedAt": "2025-10-22T16:45:50.754Z",
+                      "__v": 0
+                    },
+                    "success": "OK"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/verify-email": {
+      "post": {
+        "operationId": "AuthController_verifyEmail",
+        "summary": "Verify email with OTP",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email verified successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "access_token": "user_access_token",
+                    "user": {
+                      "fullName": "john brow",
+                      "role": "USER",
+                      "email": "useremail@provider.com",
+                      "isEmailVerified": false,
+                      "status": "active",
+                      "deletedAt": null,
+                      "lastActive": null,
+                      "tokenVersion": 2
+                    },
+                    "success": "OK",
+                    "message": "Email verified successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/verify-login": {
+      "post": {
+        "operationId": "AuthController_verifyLogin",
+        "summary": "Verify OTP for admin login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/resend-otp": {
+      "post": {
+        "operationId": "AuthController_resendOtp",
+        "summary": "Resend OTP for email verification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP resent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "success": "OK",
+                    "next": "verify-email",
+                    "message": "OTP sent successful"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "operationId": "AuthController_forgotPassword",
+        "summary": "Request password reset OTP",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP sent for password reset"
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/verify-forgot-password": {
+      "post": {
+        "operationId": "AuthController_verifyResetPassword",
+        "summary": "Verify OTP for password reset",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP verified, allow password reset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "token": "token for reset-password",
+                    "success": "OK"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/reset-password": {
+      "patch": {
+        "operationId": "AuthController_resetPassword",
+        "summary": "Reset user password after verification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "success": "OK",
+                    "message": "",
+                    "user": {
+
+                    },
+                    "access_token": "user's accessToken"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/tutors/sign-up": {
+      "post": {
+        "operationId": "TutorsController_singUp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTutorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tutors"
+        ]
+      }
+    },
+    "/tutors/onboard": {
+      "post": {
+        "operationId": "TutorsController_onboardTutor",
+        "summary": "onboards a tutor (with file uploads and multiple selections)",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnboardTutorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tutors/upload-recording/{bookingId}": {
+      "post": {
+        "operationId": "TutorsController_uploadRecording",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "meetingToken",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tutors"
+        ]
+      }
+    },
+    "/tutors/schedule": {
+      "post": {
+        "operationId": "TutorsController_tutorSchedule",
+        "summary": "creates a tutor's schedule ",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "TutorsController_updateSchedule",
+        "summary": "updates a tutor's schedule ",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "TutorsController_getTutorsSchedule",
+        "summary": "gets a tutor schedule",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "_id": "69073d63654a9af39804b654",
+                    "tutorId": "6903aad6f2f03e2b1200f1b9",
+                    "__v": 2,
+                    "blockedDates": [
+                      "2025-11-10",
+                      "2025-12-25",
+                      "2026-01-01"
+                    ],
+                    "createdAt": "2025-11-02T11:15:47.891Z",
+                    "timezone": "Africa/Lagos",
+                    "updatedAt": "2025-11-02T11:25:45.169Z",
+                    "weeklyAvailability": [
+                      {
+                        "day": "MONDAY",
+                        "ranges": [
+                          {
+                            "startTime": "09:00",
+                            "endTime": "11:00",
+                            "_id": "69073f54f432450b70fc5063"
+                          },
+                          {
+                            "startTime": "13:00",
+                            "endTime": "15:00",
+                            "_id": "69073f54f432450b70fc5064"
+                          }
+                        ],
+                        "_id": "69073f54f432450b70fc5062"
+                      },
+                      {
+                        "day": "WEDNESDAY",
+                        "ranges": [
+                          {
+                            "startTime": "10:00",
+                            "endTime": "12:00",
+                            "_id": "69073f54f432450b70fc5066"
+                          },
+                          {
+                            "startTime": "16:00",
+                            "endTime": "18:00",
+                            "_id": "69073f54f432450b70fc5067"
+                          }
+                        ],
+                        "_id": "69073f54f432450b70fc5065"
+                      },
+                      {
+                        "day": "FRIDAY",
+                        "ranges": [
+                          {
+                            "startTime": "09:30",
+                            "endTime": "11:30",
+                            "_id": "69073f54f432450b70fc5069"
+                          }
+                        ],
+                        "_id": "69073f54f432450b70fc5068"
+                      },
+                      {
+                        "day": "SATURDAY",
+                        "ranges": [
+                          {
+                            "startTime": "09:30",
+                            "endTime": "11:30",
+                            "_id": "69073f5ef432450b70fc507e"
+                          },
+                          {
+                            "startTime": "11:30",
+                            "endTime": "16:30",
+                            "_id": "69073fb9f432450b70fc5098"
+                          },
+                          {
+                            "startTime": "19:30",
+                            "endTime": "21:30",
+                            "_id": "69073fb9f432450b70fc5099"
+                          }
+                        ],
+                        "_id": "69073f5ef432450b70fc507d"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tutors/bookings/{bookingID}": {
+      "get": {
+        "operationId": "TutorsController_getBooking",
+        "summary": "get tutor's booking by ID",
+        "parameters": [
+          {
+            "name": "bookingID",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "_id": "69086aeb9465c6f7a86443c3",
+                    "tutor": {
+                      "user": {
+                        "fullName": "esther brow",
+                        "email": "marcelezenagu92@gmail.com",
+                        "id": "6907dad8f6cff34d4fe0baae"
+                      },
+                      "id": "6907dad8f6cff34d4fe0bab1"
+                    },
+                    "student": {
+                      "user": {
+                        "fullName": "user brow",
+                        "email": "marcel.c.ezenagu@gmail.com",
+                        "id": "6907da58f6cff34d4fe0baa6"
+                      },
+                      "id": "6907da58f6cff34d4fe0baa9"
+                    },
+                    "date": "2025-08-10",
+                    "startTime": "13:00",
+                    "endTime": "14:00",
+                    "status": "PENDING",
+                    "createdAt": "2025-11-03T08:42:19.135Z",
+                    "updatedAt": "2025-11-03T08:42:19.135Z",
+                    "__v": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tutors/bookings": {
+      "get": {
+        "operationId": "TutorsController_listBookings",
+        "summary": "list tutor's bookings",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "69086aeb9465c6f7a86443c3",
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-08-10",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "createdAt": "2025-11-03T08:42:19.135Z",
+                      "updatedAt": "2025-11-03T08:42:19.135Z",
+                      "__v": 0
+                    },
+                    {
+                      "_id": "69086e8eb531de76f9aa9c2f",
+                      "tutor": "6907dad8f6cff34d4fe0bab1",
+                      "student": "6907da58f6cff34d4fe0baa9",
+                      "date": "2025-11-02",
+                      "startTime": "13:00",
+                      "endTime": "14:00",
+                      "status": "PENDING",
+                      "createdAt": "2025-11-03T08:57:50.836Z",
+                      "updatedAt": "2025-11-03T08:57:50.836Z",
+                      "__v": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tutors/profile": {
+      "get": {
+        "operationId": "TutorsController_getTutors",
+        "summary": "gets a tutorProfile",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "rejectionReason": null,
+                    "user": {
+                      "fullName": "john brow",
+                      "role": "TUTOR",
+                      "email": "marcelezu92@gmail.com",
+                      "isEmailVerified": true,
+                      "status": "ACTIVE",
+                      "deletedAt": null,
+                      "lastActive": null,
+                      "tokenVersion": 0,
+                      "lastLogin": null,
+                      "phone": "0986594765",
+                      "phoneCode": "453",
+                      "createdAt": "2025-10-29T23:35:16.627Z",
+                      "updatedAt": "2025-10-29T23:35:45.317Z",
+                      "__v": 0,
+                      "id": "6902a4b465d7f1438875e05c"
+                    },
+                    "location": "sabo yaba",
+                    "subjectsOfInterest": [
+                      {
+                        "name": "mathematics",
+                        "id": "6902a460330e427877a06cd4"
+                      },
+                      {
+                        "name": "english",
+                        "id": "6902a460330e427877a06cd8"
+                      }
+                    ],
+                    "curriculum": [
+                      {
+                        "name": "american",
+                        "id": "6902a460330e427877a06cca"
+                      }
+                    ],
+                    "classLevels": [
+                      {
+                        "name": "nursery 2",
+                        "id": "6902a461330e427877a06cf6"
+                      },
+                      {
+                        "name": "ss 3",
+                        "id": "6902a461330e427877a06d1a"
+                      }
+                    ],
+                    "haveReliableComputer": true,
+                    "referenceLetters": [
+                      "uploads/refs/letter1.pdf",
+                      "uploads/refs/letter2.pdf"
+                    ],
+                    "isVerified": true,
+                    "otherCertifications": [
+                      "https://gnt-webservice.s3.eu-west-2.amazonaws.com/backend-service/othercertifications/68fa6e44fa9eda00b0b6275c-Screenshot 2025-10-23 at 09.56.16.png"
+                    ],
+                    "createdAt": "2025-10-29T23:35:16.712Z",
+                    "updatedAt": "2025-10-30T01:05:32.415Z",
+                    "certificate": "uploads/certificates/teaching_certificate.pdf",
+                    "cv": "uploads/cv/tutor_cv.pdf",
+                    "nin": "12345678901",
+                    "teachingStyleAndExperience": "I focus on personalized learning, ensuring students grasp concepts through examples and practice.",
+                    "video": "uploads/videos/tutor_intro.mp4",
+                    "yearsOfExperience": 3,
+                    "status": "APPROVED",
+                    "verifiedAt": "2025-10-30T01:05:32.414Z",
+                    "verifiedBy": "6902a47765d7f1438875e056",
+                    "id": "6902a4b465d7f1438875e05f"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "tutors"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/meeting/verify": {
+      "get": {
+        "operationId": "MeetingController_verify",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/payments": {
+      "get": {
+        "operationId": "PaymentsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "operationId": "PaymentsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admins/create-admin": {
+      "post": {
+        "operationId": "AdminsController_singUp",
+        "summary": "creates an admin by superAdmin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "admins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admins/tutors": {
+      "get": {
+        "operationId": "AdminsController_approveTutors",
+        "summary": "approves a tutors",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserFilterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "admins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admins/approve-tutor/{tutorID}": {
+      "post": {
+        "operationId": "AdminsController_ListTutors",
+        "summary": "lists all tutors",
+        "parameters": [
+          {
+            "name": "tutorID",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TutorApprovalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "admins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admins/tutors/{tutorID}": {
+      "get": {
+        "operationId": "AdminsController_getTutors",
+        "summary": "get a tutor",
+        "parameters": [
+          {
+            "name": "tutorID",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "rejectionReason": null,
+                    "user": {
+                      "fullName": "john brow",
+                      "role": "TUTOR",
+                      "email": "marceleze@gmail.com",
+                      "isEmailVerified": true,
+                      "status": "ACTIVE",
+                      "deletedAt": null,
+                      "lastActive": null,
+                      "tokenVersion": 0,
+                      "lastLogin": null,
+                      "phone": "0986594765",
+                      "phoneCode": "453",
+                      "createdAt": "2025-10-29T23:35:16.627Z",
+                      "updatedAt": "2025-10-29T23:35:45.317Z",
+                      "__v": 0,
+                      "id": "6902a4b465d7f1438875e05c"
+                    },
+                    "location": "sabo yaba",
+                    "subjectsOfInterest": [
+                      {
+                        "name": "mathematics",
+                        "id": "6902a460330e427877a06cd4"
+                      },
+                      {
+                        "name": "english",
+                        "id": "6902a460330e427877a06cd8"
+                      }
+                    ],
+                    "curriculum": [
+                      {
+                        "name": "american",
+                        "id": "6902a460330e427877a06cca"
+                      }
+                    ],
+                    "classLevels": [
+                      {
+                        "name": "nursery 2",
+                        "id": "6902a461330e427877a06cf6"
+                      },
+                      {
+                        "name": "ss 3",
+                        "id": "6902a461330e427877a06d1a"
+                      }
+                    ],
+                    "haveReliableComputer": true,
+                    "referenceLetters": [
+                      "uploads/refs/letter1.pdf",
+                      "uploads/refs/letter2.pdf"
+                    ],
+                    "isVerified": true,
+                    "otherCertifications": [
+                      "https://gnt-webservice.s3.eu-west-2.amazonaws.com/backend-service/othercertifications/68fa6e44fa9eda00b0b6275c-Screenshot 2025-10-23 at 09.56.16.png"
+                    ],
+                    "createdAt": "2025-10-29T23:35:16.712Z",
+                    "updatedAt": "2025-10-30T01:05:32.415Z",
+                    "certificate": "uploads/certificates/teaching_certificate.pdf",
+                    "cv": "uploads/cv/tutor_cv.pdf",
+                    "nin": "12345678901",
+                    "teachingStyleAndExperience": "I focus on personalized learning, ensuring students grasp concepts through examples and practice.",
+                    "video": "uploads/videos/tutor_intro.mp4",
+                    "yearsOfExperience": 3,
+                    "status": "APPROVED",
+                    "verifiedAt": "2025-10-30T01:05:32.414Z",
+                    "verifiedBy": "6902a47765d7f1438875e056",
+                    "id": "6902a4b465d7f1438875e05f"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "admins"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/uploads/tutors": {
+      "post": {
+        "operationId": "UploadController_upload",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Type of file being uploaded",
+                    "enum": [
+                      "video",
+                      "referenceLetter",
+                      "otherCertifications",
+                      "nin",
+                      "cv",
+                      "certificate"
+                    ]
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "required": [
+                  "title",
+                  "files"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Uploads"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Global Tutor API",
+    "description": "",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "http://localhost:4800/",
+      "description": "Live environment"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "access-token": {
+        "scheme": "Bearer",
+        "bearerFormat": "Bearer ",
+        "description": "Please enter token in this format: Bearer \u003Caccess-token\u003E",
+        "name": "Authorization",
+        "type": "http",
+        "in": "Header"
+      }
+    },
+    "schemas": {
+      "UserFilterDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED",
+              "PENDING"
+            ],
+            "description": "Filter by UserStatus"
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number",
+            "default": 1
+          },
+          "limit": {
+            "type": "number",
+            "description": "Number of results per page",
+            "default": 10
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Filter by start date (ISO string)"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Filter by end date (ISO string)"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "search field keyword from (fullName, email)"
+          }
+        }
+      },
+      "ObjectId": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "CreateStudentDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "learningNeeds": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string",
+            "example": "sabo yaba, Lagos, Nigeria"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "lessonGoal": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          },
+          "curriculum": {
+            "type": "string",
+            "description": "ID of Curriculum the user is interested in"
+          },
+          "classLevel": {
+            "type": "string",
+            "description": "ID of classLevel the user is interested in"
+          },
+          "subjectsOfInterest": {
+            "description": "IDs of subjects the user is interested in",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "example": "Africa/Lagos"
+          },
+          "exams": {
+            "description": "IDs of exams the user want to prepare for",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "location",
+          "phone",
+          "password",
+          "confirmPassword",
+          "curriculum",
+          "classLevel",
+          "subjectsOfInterest",
+          "timezone"
+        ]
+      },
+      "CreateReviewDto": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "number",
+            "description": "Rating for the tutor",
+            "minimum": 1,
+            "maximum": 5,
+            "example": 4
+          },
+          "comment": {
+            "type": "string",
+            "description": "Review comment from the user",
+            "example": "Great teacher, very accomplishing!"
+          },
+          "tutorID": {
+            "type": "string",
+            "description": "The ID of the tutor being reviewed",
+            "example": "650f69b41c8f2f4df44e29f1"
+          }
+        },
+        "required": [
+          "rating",
+          "comment",
+          "tutorID"
+        ]
+      },
+      "DateTimeSlotDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date in YYYY-MM-DD format",
+            "example": "2025-11-20"
+          }
+        },
+        "required": [
+          "date"
+        ]
+      },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "tutorId": {
+            "type": "string",
+            "description": "Tutor id"
+          },
+          "bookingType": {
+            "type": "string",
+            "description": "Type of booking",
+            "enum": [
+              "REGULAR",
+              "FREE_TRIAL"
+            ]
+          },
+          "dates": {
+            "description": "Selected dates with their time slots",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DateTimeSlotDto"
+            }
+          },
+          "expectation": {
+            "type": "string",
+            "description": "expectation notes"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "Name of the student to attend the booking"
+          }
+        },
+        "required": [
+          "tutorId",
+          "bookingType",
+          "dates",
+          "fullName"
+        ]
+      },
+      "ConfirmBookingDto": {
+        "type": "object",
+        "properties": {
+          "bookingID": {
+            "type": "string",
+            "description": "Tutor id"
+          },
+          "payIntent": {
+            "type": "string",
+            "description": "payIntent of the transaction"
+          }
+        },
+        "required": [
+          "bookingID",
+          "payIntent"
+        ]
+      },
+      "CreateAuthDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The unique email for the user ",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "VerifyDto": {
+        "type": "object",
+        "properties": {
+          "otp": {
+            "type": "string"
+          },
+          "emailOrPhone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "otp",
+          "emailOrPhone"
+        ]
+      },
+      "VerifyLogin": {
+        "type": "object",
+        "properties": {
+          "otp": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "otp",
+          "email"
+        ]
+      },
+      "ResendOtpDto": {
+        "type": "object",
+        "properties": {
+          "emailOrPhone": {
+            "type": "string",
+            "description": "The unique identifier for the user, email or phone number",
+            "example": "user@example.com"
+          },
+          "otpType": {
+            "type": "string",
+            "description": "The type of OTP request: either for account verification or password reset",
+            "enum": [
+              "verification",
+              "reset"
+            ],
+            "example": "verification"
+          }
+        },
+        "required": [
+          "emailOrPhone",
+          "otpType"
+        ]
+      },
+      "ForgotPasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "ResetPasswordDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "password",
+          "confirmPassword"
+        ]
+      },
+      "CreateTutorDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string",
+            "example": "Africa/Lagos"
+          },
+          "location": {
+            "type": "string",
+            "example": "sabo yaba, Lagos, Nigeria"
+          },
+          "exams": {
+            "description": "IDs of exams the tutor want to teach",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "phone",
+          "timezone",
+          "location",
+          "password",
+          "confirmPassword"
+        ]
+      },
+      "OnboardTutorDto": {
+        "type": "object",
+        "properties": {
+          "subjectsOfInterest": {
+            "description": "List of the id of the selected values",
+            "example": [
+              "64fae0f5e1f1a2b3c4d5e6f7"
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          "curriculum": {
+            "description": "List of the id of the selected values",
+            "example": [
+              "64fae0f5e1f1a2b3c4d5e6f7"
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          "classLevels": {
+            "description": "List of the id of the selected values",
+            "example": [
+              "64fae0f5e1f1a2b3c4d5e6f7"
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjectId"
+            }
+          },
+          "yearsOfExperience": {
+            "type": "number"
+          },
+          "haveReliableComputer": {
+            "type": "boolean"
+          },
+          "teachingStyleAndExperience": {
+            "type": "string"
+          },
+          "video": {
+            "type": "string"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "certificate": {
+            "type": "string"
+          },
+          "referenceLetters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nin": {
+            "type": "string"
+          },
+          "otherCertifications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "subjectsOfInterest",
+          "curriculum",
+          "classLevels",
+          "yearsOfExperience",
+          "haveReliableComputer",
+          "teachingStyleAndExperience",
+          "video",
+          "cv",
+          "certificate",
+          "referenceLetters",
+          "nin",
+          "otherCertifications"
+        ]
+      },
+      "TimeRangeDto": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "example": "09:00",
+            "description": "ranges from 00:00 to 23:59"
+          },
+          "endTime": {
+            "type": "string",
+            "example": "11:00",
+            "description": "ranges from 00:00 to 23:59"
+          }
+        },
+        "required": [
+          "startTime",
+          "endTime"
+        ]
+      },
+      "DayAvailabilityDto": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ],
+            "description": "Day of the week for this schedule entry"
+          },
+          "ranges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TimeRangeDto"
+            }
+          }
+        },
+        "required": [
+          "day",
+          "ranges"
+        ]
+      },
+      "CreateScheduleDto": {
+        "type": "object",
+        "properties": {
+          "weeklyAvailability": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayAvailabilityDto"
+            }
+          },
+          "blockedDates": {
+            "example": [
+              "2025-11-10"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "weeklyAvailability"
+        ]
+      },
+      "CreateAdminDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "TUTOR",
+              "ADMIN",
+              "MAINTAINER",
+              "SUPER_ADMIN"
+            ],
+            "default": "ADMIN"
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "phone",
+          "location",
+          "role"
+        ]
+      },
+      "TutorApprovalDto": {
+        "type": "object",
+        "properties": {
+          "approvalStatus": {
+            "type": "string",
+            "description": "Approval status of the request",
+            "enum": [
+              "PENDING",
+              "REJECTED",
+              "APPROVED"
+            ],
+            "example": "PENDING"
+          },
+          "rejectionReason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "approvalStatus"
+        ]
+      }
+    }
+  }
+}
