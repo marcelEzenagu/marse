@@ -124,6 +124,9 @@ Swagger docs available at:
 
 ## 📘 **Citation**
 
+If you use this work, please cite it as:
+
+Ezenagu, Marcel. (2025). Marse: Africa’s Premier Luxury E-Commerce Marketplace – Backend Service (v1.0). Zenodo. https://doi.org/10.xxxx/zenodo.xxxxx
 ---
 
 ## 🤝 **Contributions**
